@@ -38,6 +38,15 @@ dependencies:
   go_router:
   animate_do:
   flutter_screenutil:
+  shared_preferences:
+  firebase_auth:
+  flutter_bloc:
+  cloud_firestore:
+  firebase_core:
+  get_it:
+  google_sign_in:
+  flutter_facebook_auth:
+  fluttertoast:
 
 dev_dependencies:
   flutter_test:

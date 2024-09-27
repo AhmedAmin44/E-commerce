@@ -1,48 +1,50 @@
-import 'package:depi_final_project/core/utils/s/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class TextFormFields extends StatelessWidget {
-  const TextFormFields(
-      {super.key, required this.labelText, required this.hintText,  this.controller});
+import '../../../../core/utils/app_colors.dart';
 
+class TextFField extends StatelessWidget {
+  const TextFField({Key? key, required this.labelText, this.onChanged, this.onFieldSubmitted,this.suffixIcon, this.obscureText,}) : super(key: key);
   final String labelText;
-  final String hintText;
-  final TextEditingController? controller;
-
+  final Function (String)? onChanged;
+  final Function (String)? onFieldSubmitted;
+  final bool? obscureText;
+  final Widget? suffixIcon;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 56.h,
-      width: 342.w,
-      decoration: BoxDecoration(color: AppColors.gray),
+    return  Padding(
+      padding: const EdgeInsets.only(top:24 ,right: 8,left: 8),
       child: TextFormField(
-        controller: controller,
+        validator: (value) {
+          if(value!.isEmpty){
+            return "This Field is requierd";
+          }else{return null;}
+        },
+        onChanged:onChanged ,
+        onFieldSubmitted:onFieldSubmitted ,
+        obscureText: obscureText ?? false,
         decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: const TextStyle(
-              color: Color(0xffC6C6C6),
-              fontWeight: FontWeight.w600,
-              fontSize: 13),
+          suffixIcon:suffixIcon ,
           labelText: labelText,
-          labelStyle: const TextStyle(
-              color: Color(0xff00004D),
-              fontWeight: FontWeight.w300,
-              fontSize: 16),
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),  // Added borderRadius
-            borderSide: BorderSide(color: Color(0xffC6C6C6)),
+          labelStyle: TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey,
+            fontFamily: "Poppins",
           ),
-          enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),  // Added borderRadius
-            borderSide: BorderSide(color: Color(0xffC6C6C6)),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),  // Added borderRadius
-            borderSide: BorderSide(color: Colors.greenAccent),
-          ),
+          border: getBordrStyle(),
+          enabledBorder: getBordrStyle(),
+          focusedBorder: getBordrStyle(),
+
         ),
       ),
     );
   }
+}
+
+OutlineInputBorder getBordrStyle(){
+  return  OutlineInputBorder(
+      borderRadius: BorderRadius.circular(4.0),
+      borderSide: BorderSide(color: Colors.grey)
+  );
 }

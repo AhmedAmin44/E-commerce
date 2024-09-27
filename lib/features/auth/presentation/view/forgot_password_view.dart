@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/functions/navigation.dart';
-import '../../../../core/utils/s/app_colors.dart';
-import '../../../../core/utils/s/app_strings.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_strings.dart';
 import '../widgets/customElevatedButtom.dart';
 import '../widgets/customTextForm.dart';
+import '../widgets/custom_forgetPassword_form.dart';
 
 class FogotPasswordView extends StatelessWidget {
   const FogotPasswordView({super.key});
@@ -45,19 +46,7 @@ class FogotPasswordView extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40.h),
-            TextFormFields(
-              hintText: "Enter Email Address ",
-              labelText: AppStrings.emailAddress,
-            ),
-            SizedBox(height: 16.h),
-            CustomElevatedButton(
-              backGroundColor: AppColors.primaryColor,
-              name: "Continue",
-              textColor: Colors.white, onPressed: () {
-                //ToDo check the field isnot empty and have a correct email
-              customNavigate(context,"/resendPassword");
-            },
-            ),
+            CustomForgotPasswordForm(),
             SizedBox(height: 23.h),
           ]),
         ),

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:depi_final_project/core/utils/s/app_colors.dart';
-import 'package:depi_final_project/core/utils/s/app_strings.dart';
 import 'package:depi_final_project/core/functions/navigation.dart';
+import '../../../../core/database/cache/cache_helper.dart';
+import '../../../../core/serveces/service_locator.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_strings.dart';
 import '../widgets/customElevatedButtom.dart';
 import '../widgets/customTextForm.dart';
+import '../widgets/custom_sign_in.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController _email = TextEditingController();
@@ -35,52 +38,7 @@ class LoginScreen extends StatelessWidget {
                 child: SizedBox(height: 40.h),
               ),
               SliverToBoxAdapter(
-                child: TextFormFields(
-                  controller: _email,
-                  hintText: "Enter your Email",
-                  labelText: AppStrings.emailAddress,
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: SizedBox(height: 16.h),
-              ),
-              SliverToBoxAdapter(
-                child: TextFormFields(
-                  controller: _password,
-                  hintText: "Enter your password",
-                  labelText: AppStrings.password,
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: SizedBox(height: 8.h),
-              ),
-              SliverToBoxAdapter(
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: () {
-                      customNavigate(context, "/forgotPassword");
-                    },
-                    child: Text(
-                      "Forgot Password?",
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: SizedBox(height: 23.h),
-              ),
-              SliverToBoxAdapter(
-                child: CustomElevatedButton(
-                  imageName: null,
-                  backGroundColor: AppColors.primaryColor,
-                  name: "Continue",
-                  textColor: Colors.white, onPressed: () {  },
-                ),
+                child: CustomSignInForm()
               ),
               SliverToBoxAdapter(
                 child: SizedBox(height: 23.h),
@@ -121,7 +79,11 @@ class LoginScreen extends StatelessWidget {
                   imageName: "assets/images/Apple svg.png",
                   backGroundColor: AppColors.gray,
                   name: "Continue With Apple",
-                  textColor: Colors.black, onPressed: () {  },
+                  textColor: Colors.black,
+                  onPressed: () {
+                    CacheHelper().saveData(key: "isLoginVisited", value: true);
+                  //TODO
+                  },
                 ),
               ),
               SliverToBoxAdapter(
@@ -132,7 +94,11 @@ class LoginScreen extends StatelessWidget {
                   imageName: 'assets/images/Google.png',
                   backGroundColor: AppColors.gray,
                   name: "Continue With Google",
-                  textColor: Colors.black, onPressed: () {  },
+                  textColor: Colors.black,
+                  onPressed: () {
+                    CacheHelper().saveData(key: "isLoginVisited", value: true);
+                    //TODO
+                  },
                 ),
               ),
               SliverToBoxAdapter(
@@ -143,7 +109,11 @@ class LoginScreen extends StatelessWidget {
                   imageName: 'assets/images/Facebook.png',
                   backGroundColor: AppColors.gray,
                   name: "Continue With Facebook",
-                  textColor: Colors.black, onPressed: () {  },
+                  textColor: Colors.black,
+                  onPressed: () {
+                    CacheHelper().saveData(key: "isLoginVisited", value: true);
+                    //TODO
+                  },
                 ),
               ),
               SliverToBoxAdapter(

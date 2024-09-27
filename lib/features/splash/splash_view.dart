@@ -1,8 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-
+import '../../core/database/cache/cache_helper.dart';
 import '../../core/functions/navigation.dart';
-import '../../core/utils/s/app_colors.dart';
+import '../../core/serveces/service_locator.dart';
+import '../../core/utils/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,10 +13,21 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late bool isLoginVisited =
+      CacheHelper().getData(key: "isLoginVisited") ?? false;
+
   @override
   void initState() {
-    customDelay(context, "/login");
     super.initState();
+
+    // Delay for 3 seconds for animation, then proceed to navigation
+    Future.delayed(const Duration(seconds: 3), () {
+      if (isLoginVisited) {
+        customDelay(context, "/home");
+      } else {
+        customDelay(context, "/login");
+      }
+    });
   }
 
   @override
@@ -24,21 +36,23 @@ class _SplashScreenState extends State<SplashScreen> {
       child: Scaffold(
         backgroundColor: AppColors.primaryColor,
         body: Center(
-            child: ElasticIn(
-          animate: true,
-          duration: Duration(seconds: 3),
-          child: Container(
-            child: Image.asset("assets/images/splash_photo.png"),
+          child: ElasticIn(
+            animate: true,
+            duration: const Duration(seconds: 3),
+            child: Container(
+              child: Image.asset("assets/images/splash_photo.png"),
+            ),
           ),
-        )),
+        ),
       ),
     );
   }
 }
 
+// Custom delay for navigating after the splash animation
 void customDelay(context, path) {
   Future.delayed(
-    const Duration(seconds: 6),
+    const Duration(seconds: 3), // Add delay for navigation
     () {
       customNavigateReplacement(context, path);
     },

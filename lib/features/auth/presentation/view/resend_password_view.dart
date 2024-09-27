@@ -1,8 +1,8 @@
-import 'package:depi_final_project/core/utils/s/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/functions/navigation.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../widgets/customElevatedButtom.dart';
 
 class ResendPasswordScreen extends StatelessWidget {

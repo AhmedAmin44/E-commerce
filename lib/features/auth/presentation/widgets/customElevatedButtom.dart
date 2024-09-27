@@ -1,4 +1,3 @@
-import 'package:depi_final_project/core/utils/s/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
