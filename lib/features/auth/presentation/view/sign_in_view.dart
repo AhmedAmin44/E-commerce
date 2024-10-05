@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:depi_final_project/core/functions/navigation.dart';
-import '../../../../core/database/cache/cache_helper.dart';
-import '../../../../core/serveces/service_locator.dart';
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_strings.dart';
+import 'package:depi_final_project/core/database/cache/cache_helper.dart';
+import 'package:depi_final_project/core/utils/app_colors.dart';
+import 'package:depi_final_project/core/utils/app_strings.dart';
+import 'package:depi_final_project/features/auth/presentation/auth_cubit/auth_cubit.dart';
+import 'package:depi_final_project/features/auth/presentation/auth_cubit/auth_states.dart';
 import '../widgets/customElevatedButtom.dart';
-import '../widgets/customTextForm.dart';
 import '../widgets/custom_sign_in.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -37,9 +38,7 @@ class LoginScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: SizedBox(height: 40.h),
               ),
-              SliverToBoxAdapter(
-                child: CustomSignInForm()
-              ),
+              SliverToBoxAdapter(child: CustomSignInForm()),
               SliverToBoxAdapter(
                 child: SizedBox(height: 23.h),
               ),
@@ -82,22 +81,46 @@ class LoginScreen extends StatelessWidget {
                   textColor: Colors.black,
                   onPressed: () {
                     CacheHelper().saveData(key: "isLoginVisited", value: true);
-                  //TODO
+                    //TODO: Add Apple Sign-In Logic
                   },
                 ),
               ),
               SliverToBoxAdapter(
                 child: SizedBox(height: 20.h),
               ),
+              // Google Sign-In Button
               SliverToBoxAdapter(
-                child: CustomElevatedButton(
-                  imageName: 'assets/images/Google.png',
-                  backGroundColor: AppColors.gray,
-                  name: "Continue With Google",
-                  textColor: Colors.black,
-                  onPressed: () {
-                    CacheHelper().saveData(key: "isLoginVisited", value: true);
-                    //TODO
+                child: BlocConsumer<AuthCubit, AuthState>(
+                  listener: (context, state) {
+                    if (state is GoogleSignInSuccessState) {
+                      // Save the login visit and navigate to the home screen
+                      CacheHelper()
+                          .saveData(key: "isLoginVisited", value: true);
+                      customNavigate(context, '/home');
+                    } else if (state is GoogleSignInFailureState) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content:
+                                Text('Google Sign-In Failed: ${state.error}')),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is GoogleSignInLoadingState) {
+                      return Center(
+                          child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ));
+                    }
+                    return CustomElevatedButton(
+                      imageName: 'assets/images/Google.png',
+                      backGroundColor: AppColors.gray,
+                      name: "Continue With Google",
+                      textColor: Colors.black,
+                      onPressed: () {
+                        context.read<AuthCubit>().signInWithGoogle();
+                      },
+                    );
                   },
                 ),
               ),
@@ -112,7 +135,7 @@ class LoginScreen extends StatelessWidget {
                   textColor: Colors.black,
                   onPressed: () {
                     CacheHelper().saveData(key: "isLoginVisited", value: true);
-                    //TODO
+                    //TODO: Add Facebook Sign-In Logic
                   },
                 ),
               ),
