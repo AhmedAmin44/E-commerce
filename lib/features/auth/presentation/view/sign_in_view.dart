@@ -127,18 +127,43 @@ class LoginScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: SizedBox(height: 20.h),
               ),
+              // Facebook Sign-In Button
+
               SliverToBoxAdapter(
-                child: CustomElevatedButton(
+            child: BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is FacebookSignInSuccessState) {
+                  // Handle successful sign-in (e.g., navigate to another page)
+                  Navigator.pushNamed(context, '/home');
+                } else if (state is FacebookSignInFailureState) {
+                  // Show error message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.error)),
+                  );
+                }
+              },
+              builder: (context, state) {
+                if (state is FacebookSignInLoadingState) {
+                  // Show loading indicator while signing in
+                  return Center(
+                    child: CircularProgressIndicator(color: AppColors.primaryColor),
+                  );
+                }
+
+                // Default state (when not loading or in an error state)
+                return CustomElevatedButton(
                   imageName: 'assets/images/Facebook.png',
                   backGroundColor: AppColors.gray,
                   name: "Continue With Facebook",
                   textColor: Colors.black,
                   onPressed: () {
                     CacheHelper().saveData(key: "isLoginVisited", value: true);
-                    //TODO: Add Facebook Sign-In Logic
+                    context.read<AuthCubit>().signInWithFacebook();
                   },
-                ),
-              ),
+                );
+              },
+            ),
+          ),
               SliverToBoxAdapter(
                 child: SizedBox(height: 20.h),
               ),

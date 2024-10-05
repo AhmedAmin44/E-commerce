@@ -47,3 +47,16 @@ class GoogleSignInFailureState extends AuthState {
  final String error;
  GoogleSignInFailureState({required this.error});
 }
+// New Facebook Sign-In States
+class FacebookSignInLoadingState extends AuthState {}
+
+class FacebookSignInSuccessState extends AuthState {
+ final User user;
+ FacebookSignInSuccessState(this.user);
+}
+
+class FacebookSignInFailureState extends AuthState {
+ final String error;
+ FacebookSignInFailureState({required this.error});
+}
+
