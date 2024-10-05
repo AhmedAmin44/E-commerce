@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'auth_states.dart';
@@ -126,4 +127,48 @@ class AuthCubit extends Cubit<AuthState> {
       emit(GoogleSignInFailureState(error: error.toString()));
     }
   }
-}
+  // Facebook Sign-In Logic
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // Facebook Sign-In Logic
+  Future<void> signInWithFacebook() async {
+    emit(FacebookSignInLoadingState()); // Emit loading state
+
+    try {
+      // Trigger the sign-in flow
+      final LoginResult loginResult = await FacebookAuth.instance.login();
+
+      // Check if the login was successful
+      if (loginResult.status == LoginStatus.success) {
+        // Create a credential from the access token
+        final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+        // Once signed in, return the UserCredential
+        UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+
+        emit(FacebookSignInSuccessState(userCredential as User)); // Emit success state with UserCredential
+      } else {
+        emit(FacebookSignInFailureState( error: "Login failed: ${loginResult.status}")); // Emit failure state
+      }
+    } catch (error) {
+      emit(FacebookSignInFailureState(error:error.toString())); // Emit failure state with error message
+    }
+  }
+  Future<void> addUserToFirestore(User? user) async {
+  if (user != null) {
+  final userDoc = FirebaseFirestore.instance.collection('users').doc(user.uid);
+  final docSnapshot = await userDoc.get();
+
+  // Only add user if they do not exist in Firestore yet
+  if (!docSnapshot.exists) {
+  await userDoc.set({
+  'uid': user.uid,
+  'name': user.displayName ?? 'No Name',
+  'email': user.email ?? 'No Email',
+  'role': 'user', // Default role
+  });
+  }
+  }
+  }
+  }
