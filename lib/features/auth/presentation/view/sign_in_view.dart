@@ -70,21 +70,7 @@ class LoginScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Divider(color: Colors.black, height: 10.h),
               ),
-              SliverToBoxAdapter(
-                child: SizedBox(height: 20.h),
-              ),
-              SliverToBoxAdapter(
-                child: CustomElevatedButton(
-                  imageName: "assets/images/Apple svg.png",
-                  backGroundColor: AppColors.gray,
-                  name: "Continue With Apple",
-                  textColor: Colors.black,
-                  onPressed: () {
-                    CacheHelper().saveData(key: "isLoginVisited", value: true);
-                    //TODO: Add Apple Sign-In Logic
-                  },
-                ),
-              ),
+
               SliverToBoxAdapter(
                 child: SizedBox(height: 20.h),
               ),
@@ -113,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                       ));
                     }
                     return CustomElevatedButton(
-                      imageName: 'assets/images/Google.png',
+                      imageName: 'assets/images/auth_images/Google.png',
                       backGroundColor: AppColors.gray,
                       name: "Continue With Google",
                       textColor: Colors.black,
@@ -152,7 +138,7 @@ class LoginScreen extends StatelessWidget {
 
                 // Default state (when not loading or in an error state)
                 return CustomElevatedButton(
-                  imageName: 'assets/images/Facebook.png',
+                  imageName: 'assets/images/auth_images/Facebook.png',
                   backGroundColor: AppColors.gray,
                   name: "Continue With Facebook",
                   textColor: Colors.black,
