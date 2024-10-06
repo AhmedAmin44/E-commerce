@@ -11,6 +11,7 @@ class ItemListView extends StatelessWidget {
     return SizedBox(
       height: height.h,
       child: ListView.builder(
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) => Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.w),

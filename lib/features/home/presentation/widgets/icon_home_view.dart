@@ -1,10 +1,13 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:depi_final_project/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/routers/routers_name.dart';
+import '../../../../core/utils/text_style.dart';
 import 'category_model.dart';
+import 'home_header.dart';
 import 'item_list_top_selling.dart';
 import 'item_list_view.dart';
 import 'item_list_view_categorie.dart';
@@ -44,14 +47,15 @@ class IconHomeView extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 127.h),
+              SizedBox(height: 10.h),
+              HomeHeader(),
+              SizedBox(height: 30.h),
               const SearchTextField(),
               SizedBox(height: 10.h),
-              TextSpacerText(
-                leadingText: 'Categories',
-                textPress: () {},
-              ),
+              Text('Categories', style: TextStyles.font16BlackW700),
+              SizedBox(height: 10.h),
               ItemListViewCategorie(
                 categories: categories,
                 count: categories.length,
