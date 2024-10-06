@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/functions/navigation.dart';
 import 'item_categorie.dart';
 import 'category_model.dart'; // Import the Category model
 
@@ -19,6 +20,7 @@ class ItemListViewCategorie extends StatelessWidget {
     return SizedBox(
       height: 116.h,
       child: ListView.builder(
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: count,
         itemBuilder: (context, index) {
@@ -29,7 +31,7 @@ class ItemListViewCategorie extends StatelessWidget {
               categorieText: category.name,
               imagePath: category.imagePath,
               onPress: () {
-                Navigator.pushNamed(context, category.route);
+                customNavigate(context,category.route);
               },
             ),
           );
