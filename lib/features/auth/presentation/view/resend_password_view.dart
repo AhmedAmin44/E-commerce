@@ -16,7 +16,7 @@ class ResendPasswordScreen extends StatelessWidget {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/images/resendPassword.png"),
+            Image.asset("assets/images/auth_images/resendPassword.png"),
             SizedBox(
               height: 24.h,
             ),

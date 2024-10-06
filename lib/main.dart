@@ -1,5 +1,5 @@
 import 'package:depi_final_project/core/serveces/service_locator.dart';
-import 'package:depi_final_project/routers.dart';
+import 'package:depi_final_project/core/routers/routers.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +31,7 @@ class E_Commerce extends StatelessWidget {
       builder: (_, child) {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
-          routerConfig: routers,
+          routerConfig: router,
         );
       },
     );

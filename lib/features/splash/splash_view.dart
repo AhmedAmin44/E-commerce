@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
             animate: true,
             duration: const Duration(seconds: 3),
             child: Container(
-              child: Image.asset("assets/images/splash_photo.png"),
+              child: Image.asset("assets/images/auth_images/splash_photo.png"),
             ),
           ),
         ),

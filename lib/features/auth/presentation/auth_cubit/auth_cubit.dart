@@ -127,11 +127,10 @@ class AuthCubit extends Cubit<AuthState> {
       emit(GoogleSignInFailureState(error: error.toString()));
     }
   }
-  // Facebook Sign-In Logic
 
+
+  // Facebook Sign-In Logic
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  // Facebook Sign-In Logic
   Future<void> signInWithFacebook() async {
     emit(FacebookSignInLoadingState()); // Emit loading state
 
