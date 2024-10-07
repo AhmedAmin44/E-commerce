@@ -45,6 +45,7 @@ class IconHomeView extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w),
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
