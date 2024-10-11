@@ -33,14 +33,19 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.primaryColor,
-        body: Center(
-          child: ElasticIn(
-            animate: true,
-            duration: const Duration(seconds: 3),
-            child: Container(
-              child: Image.asset("assets/images/auth_images/splash_photo.png"),
+      child: GestureDetector(
+        onTap: (){
+          customNavigateReplacement(context, "/home");
+        },
+        child: Scaffold(
+          backgroundColor: AppColors.primaryColor,
+          body: Center(
+            child: ElasticIn(
+              animate: true,
+              duration: const Duration(seconds: 2),
+              child: Container(
+                child: Image.asset("assets/images/auth_images/splash_photo.png"),
+              ),
             ),
           ),
         ),

@@ -1,38 +1,63 @@
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/functions/navigation.dart';
+import '../../../../core/functions/flutter_toast.dart';
+import '../../../../core/widgets/shimmer_widget.dart';
+import '../../home_cubit/home_cubit.dart';
+import '../../home_cubit/home_states.dart';
+import '../../model/category_model.dart';
 import 'item_categorie.dart';
-import 'category_model.dart'; // Import the Category model
 
-class ItemListViewCategorie extends StatelessWidget {
-  const ItemListViewCategorie({
-    super.key,
-    required this.categories,
-    required this.count,
-  });
-
-  final int count;
-  final List<Category> categories; // Ensure categories is a list of Category
+class RowOptions extends StatelessWidget {
+  RowOptions({Key? key}) : super(key: key);
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<HomeCubit, HomeState>(
+
+      listener: (BuildContext context, Object? state) {
+        if (state is CategoryFailure) {
+          ShowToast(state.errmsg);
+        }
+      },
+      builder: (BuildContext context, state) {
+        return state is CategoryLoading
+            ? CustomShimmerCategory()
+            : ItemListViewCategorie(dataList:context
+            .read<HomeCubit>()
+            .CategoryList ,
+            );
+      },
+    );
+  }
+}
+////////////////////////////////////////////////////////////
+class ItemListViewCategorie extends StatelessWidget {
+
+   ItemListViewCategorie({
+    super.key,
+ required this.dataList,
+  });
+  final List<CategoryModel> dataList;
+  @override
+  Widget build(BuildContext context) {
+
     return SizedBox(
       height: 116.h,
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        itemCount: count,
+        itemCount: dataList
+            .length,
         itemBuilder: (context, index) {
-          final category = categories[index];
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: ItemCategorie(
-              categorieText: category.name,
-              imagePath: category.imagePath,
               onPress: () {
-                customNavigate(context,category.route);
-              },
+              }, model: dataList[index],
             ),
           );
         },
