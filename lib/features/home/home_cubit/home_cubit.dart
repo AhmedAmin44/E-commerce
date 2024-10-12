@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:depi_final_project/features/home/model/new_in_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,6 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
 
 List<CategoryModel> CategoryList =[];
 List<TopSellingModel> TopSellingList =[];
+List<NewInModel> NewInList =[];
 
 
 
@@ -45,6 +47,22 @@ List<TopSellingModel> TopSellingList =[];
       }));
     } on Exception catch (e) {
       emit(TopSellingFailure(errmsg: e.toString()));
+    }
+  }
+  //NewIn Data
+  Future<void> getNewInData() async {
+    try {
+      emit(NewInLoading());
+      await FirebaseFirestore.instance
+          .collection('newIn_item')
+          .get()
+          .then((value) => value.docs.forEach((element)  {
+        NewInList.add(
+            NewInModel.fromJson(element.data()));
+        emit(NewInSucces());
+      }));
+    } on Exception catch (e) {
+      emit(NewInFailure(errmsg: e.toString()));
     }
   }
 }
