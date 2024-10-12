@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/text_style.dart';
 import '../../home_cubit/home_cubit.dart';
 import '../widgets/home_header.dart';
-import '../widgets/item_list_view.dart';
-import '../widgets/item_list_view_categorie.dart';
-import '../widgets/new_in_list_view.dart';
+import '../widgets/Topselling_Widgets/item_list_view_top_selling.dart';
+import '../widgets/categories_widgets/item_list_view_categorie.dart';
+import '../widgets/newIn_widgets/new_in_list_view.dart';
 import '../widgets/search_text_field.dart';
 import '../widgets/text_spacer_text.dart';
 

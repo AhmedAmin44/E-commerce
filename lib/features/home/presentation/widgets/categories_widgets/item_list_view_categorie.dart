@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/functions/flutter_toast.dart';
-import '../../../../core/widgets/shimmer_widget.dart';
-import '../../home_cubit/home_cubit.dart';
-import '../../home_cubit/home_states.dart';
-import '../../model/category_model.dart';
+import '../../../../../core/functions/flutter_toast.dart';
+import '../../../../../core/widgets/shimmer_widget.dart';
+import '../../../home_cubit/home_cubit.dart';
+import '../../../home_cubit/home_states.dart';
+import '../../../model/category_model.dart';
 import 'item_categorie.dart';
 
 class RowOptions extends StatelessWidget {
@@ -28,7 +28,7 @@ class RowOptions extends StatelessWidget {
             ? CustomShimmerCategory()
             : ItemListViewCategorie(dataList:context
             .read<HomeCubit>()
-            .CategoryList ,
+            .categoryList ,
             );
       },
     );

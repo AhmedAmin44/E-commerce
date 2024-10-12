@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/functions/flutter_toast.dart';
-import '../../../../core/widgets/shimmer_widget.dart';
-import '../../home_cubit/home_cubit.dart';
-import '../../home_cubit/home_states.dart';
+import '../../../../../core/functions/flutter_toast.dart';
+import '../../../../../core/routers/routers_name.dart';
+import '../../../../../core/widgets/shimmer_widget.dart';
+import '../../../home_cubit/home_cubit.dart';
+import '../../../home_cubit/home_states.dart';
 import 'new_in_item.dart';
 
 class RowOptionsNewIn extends StatelessWidget {
@@ -26,8 +27,9 @@ class RowOptionsNewIn extends StatelessWidget {
         return state is TopSellingLoading
             ? CustomShimmerTopSelling()
             : ItemListViewNewIn(
-                dataList: context.read<HomeCubit>().NewInList,
+                dataList: context.read<HomeCubit>().newInList,
                 height: 300,
+                routePath: '/NewInDetailsView',
               );
       },
     );
@@ -37,10 +39,14 @@ class RowOptionsNewIn extends StatelessWidget {
 /////////////////////////////////////////////////////
 class ItemListViewNewIn extends StatelessWidget {
   const ItemListViewNewIn(
-      {super.key, required this.height, required this.dataList});
+      {super.key,
+      required this.height,
+      required this.dataList,
+      required this.routePath});
 
   final List<NewInModel> dataList;
   final int height;
+  final String routePath;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +59,7 @@ class ItemListViewNewIn extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: ItemListNewIn(
             model: dataList[index],
+            routePath: '/NewInDetailsView',
           ),
         ),
         itemCount: dataList.length,
