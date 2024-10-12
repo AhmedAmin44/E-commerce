@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:depi_final_project/features/home/model/new_in_model.dart';
 import 'package:depi_final_project/features/home/model/top_selling_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,16 +7,16 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/utils/app_colors.dart';
 
-class ItemListTopSelling extends StatefulWidget {
-  final TopSellingModel model;
+class ItemListNewIn extends StatefulWidget {
+  final NewInModel model;
 
-  const ItemListTopSelling({super.key, required this.model});
+  const ItemListNewIn({super.key, required this.model});
 
   @override
-  State<ItemListTopSelling> createState() => _ItemListTopSellingState();
+  State<ItemListNewIn> createState() => _ItemListNewIn();
 }
 
-class _ItemListTopSellingState extends State<ItemListTopSelling> {
+class _ItemListNewIn extends State<ItemListNewIn> {
   bool isLove = false;
 
   @override
@@ -74,7 +75,7 @@ class _ItemListTopSellingState extends State<ItemListTopSelling> {
                   style: TextStyle(
                       color: AppColors.primaryColor,
                       fontStyle: FontStyle.italic
-                   ,fontWeight: FontWeight.bold
+                      ,fontWeight: FontWeight.bold
                   ),
                 ),
               ],
@@ -92,13 +93,13 @@ class _ItemListTopSellingState extends State<ItemListTopSelling> {
             },
             icon: isLove
                 ? const Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  )
+              Icons.favorite,
+              color: Colors.red,
+            )
                 : const Icon(
-                    Icons.favorite_border,
-                    color: AppColors.black,
-                  ),
+              Icons.favorite_border,
+              color: AppColors.black,
+            ),
           ),
         ),
       ],

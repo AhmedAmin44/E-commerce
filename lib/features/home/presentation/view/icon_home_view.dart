@@ -1,20 +1,16 @@
 // ignore_for_file: unused_local_variable
 
-import 'package:depi_final_project/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../core/routers/routers_name.dart';
 import '../../../../core/utils/text_style.dart';
 import '../../home_cubit/home_cubit.dart';
-import '../../model/category_model.dart';
-import 'home_header.dart';
-import 'item_list_top_selling.dart';
-import 'item_list_view.dart';
-import 'item_list_view_categorie.dart';
-import 'search_text_field.dart';
-import 'text_spacer_text.dart';
+import '../widgets/home_header.dart';
+import '../widgets/item_list_view.dart';
+import '../widgets/item_list_view_categorie.dart';
+import '../widgets/new_in_list_view.dart';
+import '../widgets/search_text_field.dart';
+import '../widgets/text_spacer_text.dart';
 
 class IconHomeView extends StatelessWidget {
   const IconHomeView({super.key});
@@ -77,6 +73,10 @@ class IconHomeView extends StatelessWidget {
               TextSpacerText(
                 leadingText: "New In",
                 textPress: () {},
+              ),
+              BlocProvider(
+                create: (context) => HomeCubit()..getNewInData(),
+                child: RowOptionsNewIn(),
               ),
 
             ],
