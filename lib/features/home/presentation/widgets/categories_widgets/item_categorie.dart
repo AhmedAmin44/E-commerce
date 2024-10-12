@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../core/utils/text_style.dart';
+import '../../../../../core/utils/text_style.dart';
 
 class ItemCategorie extends StatelessWidget {
   const ItemCategorie({super.key, required this.onPress, required this.model});

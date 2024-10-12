@@ -11,9 +11,9 @@ import 'home_states.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
-List<CategoryModel> CategoryList =[];
-List<TopSellingModel> TopSellingList =[];
-List<NewInModel> NewInList =[];
+  List<CategoryModel> categoryList =[];
+  List<TopSellingModel> topSellingList =[];
+  List<NewInModel> newInList =[];
 
 
 
@@ -25,7 +25,7 @@ List<NewInModel> NewInList =[];
           .collection('category_items')
           .get()
           .then((value) => value.docs.forEach((element)  {
-         CategoryList.add(
+        categoryList.add(
             CategoryModel.fromJson(element.data()));
         emit(CategorySucces());
       }));
@@ -41,7 +41,7 @@ List<NewInModel> NewInList =[];
           .collection('top_selling')
           .get()
           .then((value) => value.docs.forEach((element)  {
-        TopSellingList.add(
+        topSellingList.add(
             TopSellingModel.fromJson(element.data()));
         emit(TopSellingSucces());
       }));
@@ -57,7 +57,7 @@ List<NewInModel> NewInList =[];
           .collection('newIn_item')
           .get()
           .then((value) => value.docs.forEach((element)  {
-        NewInList.add(
+        newInList.add(
             NewInModel.fromJson(element.data()));
         emit(NewInSucces());
       }));

@@ -1,12 +1,13 @@
 class NewInModel {
   final String name;
   final String price;
-  final String imagePath; // path or URL for the category image
+  final String imagePath;
+  final String description;
 
-  NewInModel( {
+  NewInModel({
     required this.name,
     required this.imagePath,
-    required this.price,
+    required this.price, required this.description,
   });
 
   factory NewInModel.fromJson(jsonData) {
@@ -14,6 +15,8 @@ class NewInModel {
       name: jsonData['name'],
       price:jsonData['price'],
       imagePath: jsonData['image'],
+      description: jsonData['description'],
+
     );
   }
 }
