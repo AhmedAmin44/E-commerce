@@ -63,3 +63,48 @@ class CustomShimmerCategory extends StatelessWidget {
     );
   }
 }
+class CustomShimmerTopSelling extends StatelessWidget {
+  const CustomShimmerTopSelling({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+       mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 220.h,
+            width: 159.w,
+            child: Shimmer.fromColors(
+                baseColor: Colors.grey,
+                highlightColor: Colors.white,
+                child:Padding(
+                  padding:  EdgeInsets.all(25.r),
+                  child: Container(
+                      height: 220.h,
+                      width: 159.w,decoration: BoxDecoration(borderRadius: BorderRadius.circular(16),color: Colors.grey),
+                  ),
+                )
+            ),
+          ),
+          SizedBox(width: 2.w,),
+          SizedBox(
+            height: 220.h,
+            width: 159.w,
+            child: Shimmer.fromColors(
+                baseColor: Colors.grey,
+                highlightColor: Colors.white,
+                child:Padding(
+                  padding:  EdgeInsets.all(25.r),
+                  child: Container(
+                    height: 220.h,
+                    width: 159.w,decoration: BoxDecoration(borderRadius: BorderRadius.circular(16),color: Colors.grey),
+                  ),
+                )
+            ),
+          ),
+
+        ],
+
+    );
+  }
+}

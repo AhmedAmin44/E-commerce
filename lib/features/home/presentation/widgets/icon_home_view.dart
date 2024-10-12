@@ -69,19 +69,16 @@ class IconHomeView extends StatelessWidget {
                 leadingText: "Top Selling",
                 textPress: () {},
               ),
-              const ItemListView(
-                height: 300,
-                itemBuilder: ItemListTopSelling(),
+              BlocProvider(
+                create: (context) => HomeCubit()..getTopSellingData(),
+                child: RowOptionsTopSelling(),
               ),
               SizedBox(height: 10.h),
               TextSpacerText(
                 leadingText: "New In",
                 textPress: () {},
               ),
-              const ItemListView(
-                height: 300,
-                itemBuilder: ItemListTopSelling(),
-              ),
+
             ],
           ),
         ),

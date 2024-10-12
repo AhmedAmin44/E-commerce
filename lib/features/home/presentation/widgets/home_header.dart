@@ -15,30 +15,36 @@ class _MyWidgetState extends State<HomeHeader> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 5.w),
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start, // Center the row content
         children: [
           CircleAvatar(
+            //ToDo Add Profile photo here
             child: Image.asset("assets/images/auth_images/splash_photo.png"),
           ),
-          SizedBox(width: 75.w
-            ,),
+          SizedBox(
+            width: 75.w,
+          ),
           GestureDetector(
             onTap: () async {
               final RenderBox button = context.findRenderObject() as RenderBox;
-              final Offset buttonPosition = button.localToGlobal(Offset.zero); // Get the position of the "Men" container
+              final Offset buttonPosition = button.localToGlobal(
+                  Offset.zero); // Get the position of the "Men" container
 
               // Calculate the center X position based on the container's width
-              double centerX = buttonPosition.dx + (button.size.width / 2)+25;
+              double centerX = buttonPosition.dx + (button.size.width / 2) + 25;
 
               // Show the menu centered under the container
               await showMenu(
                 context: context,
                 position: RelativeRect.fromLTRB(
-                  centerX - (150 / 2), // Align the center of the menu to the center of the container
-                  buttonPosition.dy + button.size.height, // Y-coordinate + height to appear directly under
-                  centerX + (150 / 2)+1, // Set the right boundary for the popup menu
+                  centerX - (150 / 2),
+                  // Align the center of the menu to the center of the container
+                  buttonPosition.dy + button.size.height,
+                  // Y-coordinate + height to appear directly under
+                  centerX + (150 / 2) + 1,
+                  // Set the right boundary for the popup menu
                   0, // Not used, but set to 0
                 ),
                 items: <PopupMenuEntry<String>>[
@@ -55,9 +61,11 @@ class _MyWidgetState extends State<HomeHeader> {
                     child: Text('Kids'),
                   ),
                 ],
-                color: AppColors.gray, // Set background color for the menu
+                color: AppColors.gray,
+                // Set background color for the menu
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)), // Set border radius for the menu
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(20)), // Set border radius for the menu
                 ),
               ).then((value) {
                 if (value != null) {
@@ -77,16 +85,23 @@ class _MyWidgetState extends State<HomeHeader> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(_selectedText, style: TextStyles.font16BlackW700), // Use the selected text
+                  Text(_selectedText, style: TextStyles.font16BlackW700),
+                  // Use the selected text
                   Icon(Icons.arrow_drop_down_sharp),
                 ],
               ),
             ),
           ),
-          SizedBox(width: 60.w
-            ,),
-          CircleAvatar(
-            backgroundColor: Colors.grey,
+          SizedBox(
+            width: 60.w,
+          ),
+          GestureDetector(
+            onTap: (){
+              //ToDo Navigate to Chart Screen
+            },
+            child: CircleAvatar(
+              child: Image.asset("assets/images/home_images/homeHeader.png"),
+            ),
           ),
         ],
       ),
