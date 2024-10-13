@@ -47,6 +47,8 @@ dependencies:
   google_sign_in:
   flutter_facebook_auth: '^3.5.0'
   fluttertoast:
+  shimmer:
+  cached_network_image:
 
 dev_dependencies:
   flutter_test:

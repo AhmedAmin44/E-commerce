@@ -13,4 +13,6 @@ class Routes {
   static const String shoesScreen = '/shoes';
   static const String bagsScreen = '/bags';
   static const String accessoriesScreen = '/accessories';
+  static const String TopSellingDetailsView = '/TopSellingDetailsView';
+  static const String NewInDetailsView = '/NewInDetailsView';
 }

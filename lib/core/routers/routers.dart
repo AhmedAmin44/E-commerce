@@ -1,5 +1,7 @@
 import 'package:depi_final_project/features/auth/presentation/view/sign_up_view.dart';
 import 'package:depi_final_project/core/routers/routers_name.dart';
+import 'package:depi_final_project/features/home/model/new_in_model.dart';
+import 'package:depi_final_project/features/home/model/top_selling_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/accessories/ui/accessories_screen.dart.dart';
@@ -12,6 +14,9 @@ import '../../features/clothes/_views/hoodies/ui/hoodies_screen.dart';
 import '../../features/clothes/_views/shoes/ui/shoes_screen.dart';
 import '../../features/clothes/_views/shorts/ui/shorts_screen.dart';
 import '../../features/home/presentation/view/home_screen.dart';
+import '../../features/home/presentation/widgets/Topselling_Widgets/top_selling_view.dart';
+import '../../features/home/presentation/widgets/Topselling_Widgets/top_selling_view.dart';
+import '../../features/home/presentation/widgets/newIn_widgets/new_in_details_view.dart';
 import '../../features/splash/splash_view.dart';
 
 final GoRouter router = GoRouter(routes: [
@@ -48,6 +53,20 @@ final GoRouter router = GoRouter(routes: [
     path: Routes.homeScreen,
     builder: (context, state) => HomeScreen(),
   ),
+
+
+
+  GoRoute(
+    path:Routes.TopSellingDetailsView,
+    builder: (context, state) => TopSellingDetailsView(model: state.extra as TopSellingModel,),
+  ),
+ GoRoute(
+    path:Routes.NewInDetailsView,
+    builder: (context, state) => NewInDetailsView(model: state.extra as NewInModel,),
+  ),
+
+
+
   GoRoute(
     path: Routes.hoodiesScreen,
     builder: (context, state) => HoodiesScreen(),
